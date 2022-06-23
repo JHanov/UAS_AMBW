@@ -27,7 +27,7 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(''),
+        title: Text('Detail'),
       ),
       body: Container(
         margin: EdgeInsets.all(16),

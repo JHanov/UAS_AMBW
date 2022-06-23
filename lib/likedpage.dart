@@ -21,7 +21,7 @@ class _LikedPageState extends State<LikedPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("")),
+      appBar: AppBar(title: Text("Post/s you liked")),
       body: StreamBuilder<QuerySnapshot>(
         stream: onSearch(),
         builder: (context, snapshot) {
@@ -38,16 +38,28 @@ class _LikedPageState extends State<LikedPage> {
                   String lvTitle = dsData['Title'];
                   String lvThumbnail = dsData['Thumbnail'];
                   return ListTile(
-                    title: Card(
-                      child: Row(
-                        children: [
-                          // Image.network(
-                          //   '${lvThumbnail.toString()}',
-                          //   height: 50,
-                          //   width: 50,
-                          // ),
-                          Expanded(child: Text(lvTitle))
-                        ],
+                    title: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Card(
+                        elevation: 16,
+                        child: Expanded(
+                          child: Row(
+                            children: [
+                              Padding(padding: EdgeInsets.all(8)),
+                              Image.network(
+                                lvThumbnail,
+                                height: 100,
+                                width: 100,
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Expanded(child: Text(lvTitle))
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                   );
