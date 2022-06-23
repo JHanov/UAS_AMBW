@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uas_1/apiservices.dart';
 import 'package:uas_1/dataclass.dart';
+import 'package:uas_1/detail.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -43,7 +44,43 @@ class _MyAppState extends State<MyApp> {
                   itemCount: Posts.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      title: Text(Posts[index].title),
+                      title: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DetailPage(
+                                      dpTitle: Posts[index].title,
+                                      dpDescription: Posts[index].description,
+                                      pubDate: Posts[index]
+                                          .pubDate
+                                          .toIso8601String(),
+                                      thumbnail: Posts[index].thumbnail)));
+                        },
+                        child: Card(
+                          elevation: 10,
+                          child: Container(
+                            margin: EdgeInsets.all(8),
+                            child: Row(
+                              children: [
+                                Image.network(
+                                  Posts[index].thumbnail,
+                                  width: 100,
+                                  height: 100,
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Expanded(
+                                    child: Text(
+                                  Posts[index].title,
+                                  style: TextStyle(fontSize: 12),
+                                )),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
                     );
                   },
                 );
